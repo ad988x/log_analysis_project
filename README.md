@@ -1,10 +1,9 @@
 # Log Analysis Project README
 
 There are 3 procedures that are being called within the Python program:
-
-	### top3_articles
-	### popular_authors
-	### more_than_oneperc
+	top3_articles
+	popular_authors
+	more_than_oneperc
 	
 This procedure is only importing 1 module,psycopg2(needed to be installed before use).  Each query for these procedures are defined in the beginning of the program:
 	**query1**
