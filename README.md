@@ -1,9 +1,9 @@
 # Log Analysis Project README
 
 There are 3 procedures that are being called within the Python program:
-	top3_articles
-	popular_authors
-	more_than_oneperc
+	###top3_articles
+	###popular_authors
+	###more_than_oneperc
 This procedure is only importing 1 module,psycopg2(needed to be installed before use).  Each query for these procedures are defined in the beginning of the program:
 	**query1**
 	**query2**
@@ -11,9 +11,9 @@ This procedure is only importing 1 module,psycopg2(needed to be installed before
 Then each procedure is stated the same, the 2 changes for each are changing the name of the procedure and adding the appropriate 
 query in the "c.execute()."  The procedure that is ran states:
   
-  _DBNAME="news"
+  _DBNAME="news"_
   
-  def ():
+  _def ():
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute(query*)
