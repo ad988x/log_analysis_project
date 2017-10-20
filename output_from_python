@@ -1,0 +1,6 @@
+vagrant@vagrant:/vagrant$ python Log_Analysis_Project.py
+[('Candidate is jerk, alleges rival', 338647L), ('Bears love berries, alleges be
+ar', 253801L), ('Bad things gone, say good people', 170098L)]
+[('Ursula La Multa', 507594L), ('Rudolf von Treppenwitz', 423457L), ('Anonymous
+Contributor', 170098L), ('Markoff Chaney', 84557L)]
+[(datetime.date(2016, 7, 17), 2.26268624680273)]
