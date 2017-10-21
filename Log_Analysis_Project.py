@@ -54,16 +54,17 @@ def more_than_oneperc():
     db.close()
     return result
 
-    print("\nWhat are the top three articles of all time?\n")
-    for title, views in top3_articles():
-        print("    {}  --  {} views".format(title, views))
+ 
+print("\nWhat are the top three articles of all time?\n")
+for title, views in top3_articles():
+    print("    {}  --  {} views".format(title, views))
 
-    print("\nWho are the most popular article authors of all time?\n")
-    for name, views in popular_authors():
-        print("    {}  --  {} views".format(name, views))
+print("\nWho are the most popular article authors of all time?\n")
+for name, views in popular_authors():
+    print("    {}  --  {} views".format(name, views))
 
-    print("\nOn which days did more than 1% of requests lead to errors?\n")
-    for day, errors in more_than_oneperc():
-        print("    {}  --  {} views".format(day, errors))
+print("\nOn which days did more than 1% of requests lead to errors?\n")
+for day, errors in more_than_oneperc():
+    print("    {}  --  {} views".format(day, errors))
 
 
