@@ -1,40 +1,23 @@
 # Log Analysis Project README
+## What is it???
 
-There are 3 procedures that are being called within the Python program:
+The database that is being used in this program contains information about a fictitious newspaper's web site about the articles on the site, the articles' authors, and a log of when clients attempted to access an article on the web site.  What we will be doing is calling 3 procedures within this program(top3_articles, popular_authors and more_than_oneperc).  There are 3 questions that are being asked in this procedure, by running:
+	top3_articles; this is answering: What are the most popular three articles of all time?
+	popular_authors; this will be answering: Who are the most popular article authors of all time?
+	more_than_oneperc; will be answering: On which days did more than 1% of requests lead to errors?
 
-	top3_articles
-	popular_authors
-	more_than_oneperc
+### Software Needed:
+
+	Python Program
+	PostgreSQL
+	Installing the psycopg2 Library
 	
-This procedure is only importing 1 module,psycopg2(needed to be installed before use).  Each query for these procedures are defined in the beginning of the program:
+This pogram is being ran through a Virtual Machine environment using Vagrant.  You will have to download both programs, depending on your operating system (windows, Linux, Apple)
+	Virtual-Machine: https://www.virtualbox.org/wiki/Download_Old_Builds_5_1
+	Vagrant: https://www.vagrantup.com/downloads.html
 
-	**query1**
-	**query2**
-	**query3**
-	
-Then each procedure is stated the same, the 2 changes for each are changing the name of the procedure and adding the appropriate 
-query in the "c.execute()."  The procedure that is ran states:
-  
-  _DBNAME="news"_
-  
-  _def ():
-    db = psycopg2.connect(database=DBNAME)
-    c = db.cursor()
-    c.execute(query*)
-    result = c.fetchall()
-    db.close()
-    return result_
 
-top3_articles is pulling data from the newsdata.sql file and using a SQL query to find the Top 3 articles of all time, ordered by the highest amount first.  The SQL query that is being ran states:
-
-	SELECT articles.title, COUNT(log.id) AS cnt 
-	FROM log, articles 
-	WHERE log.path = CONCAT('/article/',articles.slug) 
-	GROUP BY articles.title 
-	ORDER BY cnt DESC 
-	LIMIT 3
-	
-This query has been defined in the procedure as "query1".
+top3_articles is pulling data from the newsdata.sql file and using a SQL query to find the Top 3 articles of all time, ordered by the highest amount first.  The SQL query that is being ran will not need a CEATE VIEW, just the stored SQL SELECT Query in the Python Program.  This query has been defined in the procedure as "query1".
 
 popular_authors is pulling data from the newsdata.sql file and using a SQL query to find the most popular authors of all time and populating the views.  This SQL query is using 1 CREATE VIEW:
 
@@ -43,10 +26,6 @@ popular_authors is pulling data from the newsdata.sql file and using a SQL query
 	FROM log, articles 
 	WHERE articles.slug = substring(path,10) 
 	GROUP BY articles.author; 
-	SELECT name, vws 
-	from authors, numViews 
-	where authors.id = numViews.author 
-	ORDER BY vws DESC
 	
 This query has been defined in the procedure as "query2".
 
@@ -58,13 +37,9 @@ more_than_oneperc is the final procedure to be defined using the data from newsd
 	GROUP BY date(time); 
 	
 	CREATE VIEW errors as 
-	select date(time) as dt, count (*) as err 
+	select date(time) as dt, count (*) as cnt 
 	from log 
 	where status like '%4%' or status like'%5%' 
 	GROUP BY date(time); 
-	
-	select errors.dt, (cast(errors.cnt as float)/cast(totals.cnt as float))*100 as perc 
-	from errors, totals 
-	where errors.dt=totals.dt and (cast(errors.cnt as float)/cast(totals.cnt as float)*100)>1.0
 	
 After each of these procedures were defined, all 3 are printed with each of the answers to each question.
